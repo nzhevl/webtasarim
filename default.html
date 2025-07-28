@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Arkadaşlık Testi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+      padding: 30px;
+    }
+    .kutu {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #sonuc {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="kutu">
+    <h1>Beni Ne Kadar Tanıyorsun?</h1>
+    <form id="testForm">
+      <p>1. En sevdiğim yemek hangisi?</p>
+      <input type="radio" name="q1" value="mantı"> Mantı<br>
+      <input type="radio" name="q1" value="sushi"> Sushi<br>
+      <input type="radio" name="q1" value="pizza"> Pizza<br><br>
+
+      <p>2. Sabahları nasılım?</p>
+      <input type="radio" name="q2" value="uykucu"> Uykucu<br>
+      <input type="radio" name="q2" value="enerjik"> Enerjik<br>
+      <input type="radio" name="q2" value="sinirli"> Sinirli<br><br>
+
+      <p>3. En sevdiğim renk?</p>
+      <input type="radio" name="q3" value="mavi"> Mavi<br>
+      <input type="radio" name="q3" value="siyah"> Siyah<br>
+      <input type="radio" name="q3" value="kırmızı"> Kırmızı<br><br>
+
+      <p>4. En çok gitmek istediğim ülke?</p>
+      <input type="radio" name="q4" value="japonya"> Japonya<br>
+      <input type="radio" name="q4" value="norveç"> Norveç<br>
+      <input type="radio" name="q4" value="brezilya"> Brezilya<br><br>
+
+      <button type="button" onclick="hesapla()">Sonucu Göster 🚀</button>
+    </form>
+
+    <div id="sonuc"></div>
+  </div>
+
+  <script>
+    function hesapla() {
+      const dogruCevaplar = {
+        q1: "mantı",
+        q2: "enerjik",
+        q3: "mavi",
+        q4: "norveç"
+      };
+
+      let puan = 0;
+
+      for (let soru in dogruCevaplar) {
+        const secili = document.querySelector(`input[name="${soru}"]:checked`);
+        if (secili && secili.value === dogruCevaplar[soru]) {
+          puan += 10;
+        }
+      }
+
+      let yorum = "";
+      if (puan === 40) yorum = "MÜKEMMEL! Sen beni ezbere biliyorsun! 🏆";
+      else if (puan >= 20) yorum = "Fena değil! Biraz daha tanıyabilirsin 😄";
+      else yorum = "Hmm... Beni tanımıyorsun ama olsun 😅";
+
+      document.getElementById("sonuc").innerHTML =
+        `<p>Puanın: ${puan}/40</p><p>${yorum}</p>`;
+    }
+  </script>
+</body>
+</html>
